@@ -1,0 +1,7 @@
+[project]
+name = "teleai"
+version = "0.1.0"
+description = "Telecom AI for telemetry data"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
