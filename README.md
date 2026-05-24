@@ -29,7 +29,7 @@ A custom-built Retrieval-Augmented Generation (RAG) core engineered from scratch
 Utilising Docker and `uv` for deterministic, cached builds:
 ```bash
 docker build -t teleai-agent .
-
+```
 ### 2. Run the Microservice
 ```
 docker run -p 8765:8765 teleai-agent
