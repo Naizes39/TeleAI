@@ -1,0 +1,10 @@
+Nokia 5G Edge Node - Operations and Troubleshooting Manual v4.2
+
+Section 3.1: Handling CPU and Memory Degradation
+When a 5G edge node experiences CPU load exceeding 90% or memory usage above 80%, the system risks entering a kernel panic. The standard operating procedure is to instantly reroute traffic to the nearest secondary node using the command: `gNB-reroute --target secondary --force`. Following rerouting, execute a graceful restart of the baseband unit.
+
+Section 3.2: Mitigating Network Latency and Jitter
+Latency exceeding 150ms or jitter exceeding 30ms directly degrades ultra-reliable low-latency communication (URLLC) slices. This is typically caused by buffer bloat in the transport layer. Engineers must flush the transport buffer and reset the QoS (Quality of Service) scheduler. Execute the following sequence: `sysctl -w net.ipv4.tcp_congestion_control=bbr` followed by `systemctl restart nokia-qos-daemon`.
+
+Section 3.3: Radio Link Failures (RLF) and Packet Loss
+If packet loss exceeds 5% or Radio Link Failures (RLF) exceed 10 within a single monitoring window, the antenna array is likely experiencing severe physical interference or misalignment. Software mitigation requires dropping the modulation scheme to QPSK to ensure signal robustness. Run: `radio-ctrl --set-modulation QPSK --node <server_id>`. Physical inspection of the cell tower is required within 24 hours.
